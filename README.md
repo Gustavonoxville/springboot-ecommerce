@@ -1,4 +1,4 @@
-\# 🛒 ecommerce-api
+\# 🛒 E-commerce API
 
 
 
@@ -32,7 +32,7 @@ API RESTful para gerenciamento de um e-commerce, desenvolvida em Java com Spring
 
 
 
-\## 🚀 Como rodar o projeto
+\## 🚀 Como executar o projeto
 
 
 
@@ -44,7 +44,7 @@ API RESTful para gerenciamento de um e-commerce, desenvolvida em Java com Spring
 
 \- Maven 3.8+
 
-\- MySQL rodando localmente
+\- MySQL instalado e em execução localmente
 
 
 
@@ -52,11 +52,11 @@ API RESTful para gerenciamento de um e-commerce, desenvolvida em Java com Spring
 
 
 
-\### 📁 Configuração do ambiente
+\### ⚙️ Configuração do ambiente
 
 
 
-Altere o  arquivo `application.properties` na pasta `src/main/resources/` com suas credenciais de banco, para facilitar os teste, não foi criado um .env com as informações mais sensíveis.
+1\. Edite o arquivo `application.properties` na pasta `src/main/resources/` com suas credenciais de banco de dados:
 
 
 
@@ -72,19 +72,19 @@ jwt.expirationMs=86400000
 
 
 
-\# Config banco de dados MySQL
+\# Configuração do banco de dados MySQL
 
 spring.datasource.url=jdbc:mysql://localhost:3306/ecommerce\_db?useSSL=false\&serverTimezone=UTC
 
-spring.datasource.username=root <--seu user do banco
+spring.datasource.username=root # seu usuário do banco
 
-spring.datasource.password=root <--seu password do banco
+spring.datasource.password=root # sua senha do banco
 
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
 
 
-\# Config do JPA
+\# Configuração do JPA
 
 spring.jpa.hibernate.ddl-auto=update
 
@@ -96,67 +96,55 @@ spring.jpa.properties.hibernate.format\_sql=true
 
 
 
-\## 🗃️ Banco de dados
+---
 
 
 
-O projeto inclui um dump SQL (`ecommerce\\\_db\\\_dump.sql`) que pode ser importado para facilitar a criação da base de dados.
+
+
+\### 🗃️ Configuração do banco de dados
+
+Crie o banco de dados:
 
 
 
-✅ Pré-requisitos
-
-MySQL deve estar instalado e acessível via terminal (comando mysql)
-
-
-
-O usuário (root) deve ter permissões para criar bancos e importar arquivos
-
-
-
-Antes de importar o arquivo `.sql`, crie o banco `ecommerce\_db` executando o seguinte comando no terminal (cmd, PowerShell, Git Bash, ou terminal do VS Code):
-
-
-
-```bash
+bash
 
 mysql -u root -p -e "CREATE DATABASE ecommerce\_db"
 
+Importe o dump SQL:
 
 
 
-
-Para importar:
-
-
-
-```bash
+bash
 
 mysql -u root -p ecommerce\_db < ecommerce\_db\_dump.sql
 
+▶️ Executando a aplicação
 
-
-▶️ Executando
-
-Com o terminal na raiz do projeto, e como o JAVA 17 configurado corretamente, execute:
+Na raiz do projeto, execute:
 
 
 
-```bash
+bash
 
 ./mvnw spring-boot:run
 
 A API estará disponível em: http://localhost:8080
 
-Na raíz do projeto existe uma Collection (Spring Boot E-Commerce - Produtos.postman\_collection.json), você pode fazer a importação no POSTMAN para otimizar o teste dos end-points
-
-obs: Trocar os tokens no Authorization
 
 
+---
 
 
 
+\###🛠️ Testando a API
 
 
 
+Importe a collection do Postman (Spring Boot E-Commerce - Produtos.postman\_collection.json) para testar os endpoints.
+
+
+
+Observação: Atualize os tokens no cabeçalho Authorization ao testar endpoints protegidos.
 
