@@ -1,0 +1,362 @@
+{
+	"info": {
+		"_postman_id": "c09253d9-9ac1-496b-852f-a9c637f3bcfc",
+		"name": "Spring Boot E-Commerce - Produtos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1920152"
+	},
+	"item": [
+		{
+			"name": "Login - ADMIN",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"admin123\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/auth/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login - USER",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"user\",\n    \"password\": \"user123\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/auth/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Produto (ADMIN)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Notebook Dell\",\n    \"description\": \"Intel i7, 16GB RAM\",\n    \"price\": 5999.99,\n    \"category\": \"Eletr\\u00f4nicos\",\n    \"stockQuantity\": 10\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar Produto (ADMIN)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Notebook Dell Atualizado\",\n    \"description\": \"Agora com SSD 1TB\",\n    \"price\": 6499.99,\n    \"category\": \"Eletr\\u00f4nicos\",\n    \"stockQuantity\": 8\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar Produto (ADMIN)",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/products/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Produtos (Todos)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{jwt_token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/products",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Realizar Pedidos (USER)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOiJVU0VSIiwiaWF0IjoxNzUyNzgyNzMwLCJleHAiOjE3NTI4NjkxMzB9.kKdaUFBeHG8zOatFljpL7Qf3jSf0AJyuTdxksDVVeu0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"items\": [\r\n    {\r\n      \"productId\": \"66f0d706-e173-4014-a869-9afbef425a0b\",\r\n      \"quantity\":1000\r\n    },\r\n    {\r\n      \"productId\": \"be5813ee-f381-4d34-bedb-7f012ae5984f\",\r\n      \"quantity\": 5\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Pedidos (USER)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOiJVU0VSIiwiaWF0IjoxNzUyNzgyNDI5LCJleHAiOjE3NTI4Njg4Mjl9.SOC7uZtREAvcBfNCSjKe64dJuh5Br2j5Quv5wf_b400",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/orders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pagar pedido (USER)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwicm9sZXMiOiJVU0VSIiwiaWF0IjoxNzUyNzgyNDI5LCJleHAiOjE3NTI4Njg4Mjl9.SOC7uZtREAvcBfNCSjKe64dJuh5Br2j5Quv5wf_b400",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/orders/71908363-5a76-4ecf-97e8-29f7ed422943/pay",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"orders",
+						"71908363-5a76-4ecf-97e8-29f7ed422943",
+						"pay"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Analitics - top-buyers (ADMIN)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjoiQURNSU4sVVNFUiIsImlhdCI6MTc1Mjc4NzU3OSwiZXhwIjoxNzUyODczOTc5fQ.AZRulGAQL7VV7JNQa7NpfN3gfBV8lK6kOmOP8isJmug",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/analytics/top-buyers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"analytics",
+						"top-buyers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Analitics - average-ticket (ADMIN)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjoiQURNSU4sVVNFUiIsImlhdCI6MTc1Mjc4NzU3OSwiZXhwIjoxNzUyODczOTc5fQ.AZRulGAQL7VV7JNQa7NpfN3gfBV8lK6kOmOP8isJmug",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/analytics/average-ticket",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"analytics",
+						"average-ticket"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Analitics - monthly-revenue (ADMIN)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGVzIjoiQURNSU4sVVNFUiIsImlhdCI6MTc1Mjc4NzU3OSwiZXhwIjoxNzUyODczOTc5fQ.AZRulGAQL7VV7JNQa7NpfN3gfBV8lK6kOmOP8isJmug",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/analytics/monthly-revenue",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"analytics",
+						"monthly-revenue"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
