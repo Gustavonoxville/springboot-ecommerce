@@ -52,7 +52,7 @@ Pré-requisitos
 bash
 mysql -u root -p -e "CREATE DATABASE ecommerce_db"
 ```
-Importe o dump SQL:
+2. Importe o dump SQL:
 ```
 bash
 mysql -u root -p ecommerce\_db < ecommerce\_db\_dump.sql
