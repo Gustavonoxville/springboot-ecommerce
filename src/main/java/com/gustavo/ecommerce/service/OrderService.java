@@ -49,7 +49,7 @@ public class OrderService {
 	public OrderResponseDTO createOrder(OrderRequestDTO dto, String username) {
 
 		User user = userRepository.findByUsername(username)
-				.orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+				.orElseThrow(() -> new BusinessException("Usuário não encontrado"));
 
 		Order order = new Order();
 		order.setUser(user);
@@ -61,7 +61,7 @@ public class OrderService {
 
 		for (OrderItemRequestDTO itemDto : dto.getItems()) {
 			Product product = productRepository.findById(itemDto.getProductId())
-					.orElseThrow(() -> new RuntimeException("Produto não encontrado: " + itemDto.getProductId()));
+					.orElseThrow(() -> new BusinessException("Produto não encontrado: " + itemDto.getProductId()));
 
 			if (product.getStockQuantity() < itemDto.getQuantity()) {
 				throw new BusinessException("Estoque insuficiente para o produto: " + product.getName());

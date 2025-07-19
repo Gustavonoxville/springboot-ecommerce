@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.gustavo.ecommerce.entity.Product;
+import com.gustavo.ecommerce.exception.BusinessException;
 import com.gustavo.ecommerce.repository.ProductRepository;
 
 @Service
@@ -21,7 +23,7 @@ public class ProductService {
 
 	public Product update(UUID id, Product updated) {
 		Product existing = productRepository.findById(id)
-				.orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+				.orElseThrow(() -> new BusinessException("Produto não encontrado"));
 
 		existing.setName(updated.getName());
 		existing.setDescription(updated.getDescription());
@@ -33,7 +35,16 @@ public class ProductService {
 	}
 
 	public void delete(UUID id) {
-		productRepository.deleteById(id);
+		
+		if (!productRepository.existsById(id)) {
+			throw new BusinessException("Produto não encontrado para o id: " + id);
+		}
+		
+		try {
+			productRepository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new BusinessException("Não é possível deletar o produto pois ele está associado a um pedido.");
+		}
 	}
 
 	public List<Product> findAll() {
@@ -41,6 +52,6 @@ public class ProductService {
 	}
 
 	public Product findById(UUID id) {
-		return productRepository.findById(id).orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+		return productRepository.findById(id).orElseThrow(() -> new BusinessException("Produto não encontrado"));
 	}
 }
